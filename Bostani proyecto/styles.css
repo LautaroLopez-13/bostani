@@ -1,0 +1,413 @@
+/* ==========================================
+   1. VARIABLES Y CONFIGURACIÓN GENERAL 
+   ========================================== */
+:root {
+    --primary: #7b4f24;       /* Marrón café principal */
+    --primary-light: #966332; /* Marrón más claro para hovers */
+    --accent: #a35e0d;        /* Dorado/Marrón cálido para destacar */
+    --bg-main: #faf6f0;       /* Fondo general cremita muy sutil */
+    --bg-card: #ffffff;       /* Fondo blanco puro para las tarjetas */
+    --text-dark: #2c2520;     /* Texto principal casi negro, más suave */
+    --text-muted: #6e655f;    /* Texto secundario o descripciones */
+    --transition: all 0.3s ease; /* Transición estándar para animaciones */
+}
+
+/* Reset moderno y box-sizing universal */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Desplazamiento suave al cliquear el menú */
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Tipografía limpia para lectura */
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==========================================
+   2. HEADER & NAVBAR (Fija y Elegante)
+   ========================================== */
+.main-header {
+    background-color: rgba(123, 79, 36, 0.95); /* Semi-transparente */
+    backdrop-filter: blur(5px); /* Efecto vidrio esmerilado */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-menu ul li a {
+    color: #f0e6df;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: var(--transition);
+    position: relative;
+}
+
+/* Línea animada debajo de los links al pasar el mouse */
+.nav-menu ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent);
+    transition: var(--transition);
+}
+
+.nav-menu ul li a:hover {
+    color: white;
+}
+
+.nav-menu ul li a:hover::after {
+    width: 100%;
+}
+
+/* ==========================================
+   3. SECCIÓN HERO (Bienvenida de Impacto)
+   ========================================== */
+.hero-section {
+    height: 70vh; /* Ocupa el 70% de la pantalla */
+    /* Usamos un degradado oscuro encima de una foto para que se lea el texto */
+    background: linear-gradient(rgba(44, 37, 32, 0.6), rgba(44, 37, 32, 0.7)), 
+                url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1200') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding-top: 80px; /* Evita que la navbar tape el contenido */
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+    color: #f5f5f5;
+}
+
+/* Botón estilizado moderno */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--accent);
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(163, 94, 13, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px); /* Efecto leve de elevación */
+    box-shadow: 0 6px 20px rgba(163, 94, 13, 0.4);
+}
+
+/* ==========================================
+   4. SECCIÓN MENÚ (Grilla de Tarjetas)
+   ========================================== */
+.menu-section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 50px;
+    font-weight: 300;
+}
+
+/* La magia del Grid: Se adapta a 3 columnas en PC y 1 en celu automáticamente */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.menu-item {
+    background-color: var(--bg-card);
+    border: none; /* Chau bordes toscos */
+    border-radius: 12px;
+    overflow: hidden; /* Mantiene las esquinas redondeadas si metés fotos */
+    box-shadow: 0 10px 30px rgba(123, 79, 36, 0.05); /* Sombra ultra suave */
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(123, 79, 36, 0.12);
+}
+
+/* Placeholder para fotos de los platos */
+.menu-item-image {
+    height: 200px;
+    background-color: #eaddcf;
+    background-image: linear-gradient(45deg, #eaddcf, #d5c2b1);
+}
+
+.menu-item-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.menu-item-info h3 {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.menu-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Empuja el precio siempre hacia abajo */
+}
+
+.price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* ==========================================
+   5. SECCIÓN NOSOTROS (Estructura de dos lados)
+   ========================================== */
+.about-section {
+    background-color: #f3eae1; /* Alternamos fondo para romper la monotonía */
+    padding: 80px 0;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+    align-items: center;
+}
+
+.about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.3rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.about-image {
+    height: 350px;
+    background: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=800') no-repeat center center/cover;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* ==========================================
+   6. SECCIÓN CONTACTO (Tarjetas limpias)
+   ========================================== */
+.contact-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.3rem;
+    color: var(--primary);
+    margin-bottom: 40px;
+}
+
+.contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.contact-cards .card {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+}
+
+.contact-cards .card h3 {
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-cards .card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ==========================================
+   7. FOOTER
+   ========================================== */
+footer {
+    background-color: var(--primary);
+    color: #f0e6df;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.9rem;
+    border-top: 4px solid var(--accent);
+}
+
+/* ==========================================
+   8. RESPONSIVE DESIGN (Media Queries)
+   ========================================== */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .about-grid {
+        gap: 30px;
+    }   
+}
+/* ==========================================
+   NUEVOS ESTILOS PARA FOTOS Y ESPECIFICACIONES 
+   ========================================== */
+
+/* Estilo para que la imagen ocupe su contenedor perfectamente */
+.menu-item-image {
+    height: 220px; /* Un poquito más alta para que luzca la foto */
+    background: #eaddcf; /* Fondo de carga */
+    overflow: hidden;
+}
+
+.menu-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Evita que la foto se estire o se deforme */
+    transition: var(--transition);
+}
+
+/* Efecto de zoom suave en la foto cuando pasás el mouse por la tarjeta */
+.menu-item:hover .menu-item-image img {
+    transform: scale(1.06);
+}
+
+/* Contenedor de etiquetas/tags */
+.menu-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+/* Base de los Tags */
+.tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+}
+
+/* Colores de los tags según la especificación */
+.tag-classic {
+    background-color: #eaddcf;
+    color: var(--primary);
+}
+
+.tag-veggie {
+    background-color: #e2f0d9;
+    color: #385723;
+}
+
+.tag-healthy {
+    background-color: #fff2cc;
+    color: #7f6000;
+}
+
+.tag-vegan {
+    background-color: #d9ead3;
+    color: #274e13;
+}
+
+/* Texto de especificaciones de ingredientes */
+.menu-specs {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background-color: #fcf9f5;
+    padding: 10px;
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
